@@ -3,6 +3,7 @@
 
 # Problem: Print all subsequences of a string
 
+from typing import List
 
 def print_subsequences(s: str, index: int, output: list):
     """Print all subsequences of a string
@@ -76,9 +77,31 @@ def print_any_subsequence_with_sum_k(s: list, index: int, output: list, k: int) 
     return print_any_subsequence_with_sum_k(s, index + 1, output, k)
 
 
+def print_all_subsequences(s: str, index: int, output: List[str]) -> None:
+    """Print all subsequences of a string
+
+    Args:
+        s (str): Input string
+        index (int): Current index
+        output (list): Output list
+    """
+    
+    if index >= len(s):
+        print(" ".join(output)) 
+        return 
+    
+    # Include the current character
+    output.append(s[index])
+    print_all_subsequences(s, index + 1, output)
+    # Exclude the current character
+    output.pop()
+    print_all_subsequences(s, index + 1, output)
+
+
 if __name__ == "__main__":
-    s = "abc"
+    s = "abc12"
     print_subsequences(s, 0, [])
+    print_all_subsequences(s, 0, [])
 
     s = [1, 1, 2, 3, 4, 2, 3, 4, 5, 6]
     k = 6
